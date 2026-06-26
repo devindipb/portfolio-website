@@ -74,92 +74,17 @@ const Stats = () => {
   ];
 
   return (
-    <section
-      style={{
-        padding: "35px 8% 60px",
-        background: "#0f172a",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4,1fr)",
-          background: "rgba(30,41,59,.88)",
-          backdropFilter: "blur(18px)",
-          border: "1px solid rgba(255,255,255,.08)",
-          borderRadius: "22px",
-          overflow: "hidden",
-          boxShadow: "0 10px 35px rgba(0,0,0,.25)",
-        }}
-      >
+    <section id="stats" className="stats-section">
+      <div className="stats-grid">
         {stats.map((item, index) => (
-          <div
-            key={index}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "rgba(56,189,248,.05)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "transparent";
-            }}
-            style={{
-              padding: "30px 22px",
-              textAlign: "center",
-              transition: ".35s",
-              cursor: "pointer",
-              borderRight:
-                index !== stats.length - 1
-                  ? "1px solid rgba(255,255,255,.08)"
-                  : "none",
-            }}
-          >
-            <div
-              style={{
-                width: "62px",
-                height: "62px",
-                margin: "0 auto 18px",
-                borderRadius: "18px",
-                background: `${item.color}20`,
-                color: item.color,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: "30px",
-              }}
-            >
+          <div key={index} className="stats-card">
+            <div className="stats-icon" style={{ background: `${item.color}20`, color: item.color }}>
               {item.icon}
             </div>
 
-            <h2
-              style={{
-                color: "white",
-                fontSize: "42px",
-                fontWeight: "700",
-                marginBottom: "8px",
-              }}
-            >
-              {item.number}
-            </h2>
-
-            <p
-              style={{
-                color: "#cbd5e1",
-                fontSize: "16px",
-                marginBottom: "18px",
-              }}
-            >
-              {item.label}
-            </p>
-
-            <div
-              style={{
-                width: "58px",
-                height: "4px",
-                borderRadius: "20px",
-                background: item.color,
-                margin: "0 auto",
-              }}
-            />
+            <h2 className="stats-number">{item.number}</h2>
+            <p className="stats-label">{item.label}</p>
+            <div className="stats-divider" style={{ background: item.color }} />
           </div>
         ))}
       </div>

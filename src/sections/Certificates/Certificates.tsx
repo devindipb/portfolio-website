@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  FaCheckCircle,
-  FaSearchPlus,
-  FaEye,
-} from "react-icons/fa";
+import { FaCheckCircle, FaSearchPlus, FaEye } from "react-icons/fa";
 
 import awsBuilder from "../../assets/certificates/aws-cloud-builder.jpg";
 import awsBadge from "../../assets/certificates/aws-cloud-builder-badge.png";
@@ -74,283 +70,71 @@ const Certificates = () => {
       image: powerapps,
     },
   ];
-    return (
-    <>
-      <section
-        id="certificates"
-        style={{
-          padding: "100px 10%",
-          background: "#020617",
-          color: "white",
-        }}
-      >
-        <h2
-          style={{
-            textAlign: "center",
-            color: "#38bdf8",
-            fontSize: "46px",
-            marginBottom: "60px",
-            fontWeight: 700,
-          }}
-        >
-          Certificates
-        </h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit,minmax(340px,1fr))",
-            gap: "30px",
-          }}
-        >
+  return (
+    <>
+      <section id="certificates" className="certificates-section">
+        <h2 className="section-title">Certificates</h2>
+        <div className="certificates-grid">
           {certificates.map((cert, index) => (
-            <div
-              key={index}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform =
-                  "translateY(-10px)";
-                e.currentTarget.style.boxShadow =
-                  "0 20px 45px rgba(56,189,248,.30)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform =
-                  "translateY(0)";
-                e.currentTarget.style.boxShadow =
-                  "none";
-              }}
-              style={{
-                background: "rgba(30,41,59,.92)",
-                border: "1px solid rgba(56,189,248,.25)",
-                borderRadius: "18px",
-                overflow: "hidden",
-                transition: ".35s",
-                backdropFilter: "blur(18px)",
-                display: "flex",
-                flexDirection: "column",
-                height: "100%",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
+            <article key={index} className="certificate-card">
+              <div className="certificate-image-wrapper">
                 <img
                   src={cert.image}
                   alt={cert.title}
-                  style={{
-                    width: "100%",
-                    height: "230px",
-                    objectFit: "cover",
-                    transition: ".45s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform =
-                      "scale(1.07)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform =
-                      "scale(1)";
-                  }}
+                  className="certificate-image"
                 />
-
+                <span className="certificate-badge">{cert.category}</span>
+                <span className="certificate-status">
+                  <FaCheckCircle /> Verified
+                </span>
                 <div
-                  style={{
-                    position: "absolute",
-                    top: "15px",
-                    left: "15px",
-                    background: "#f59e0b",
-                    color: "white",
-                    padding: "7px 14px",
-                    borderRadius: "30px",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                  }}
+                  className="certificate-overlay"
+                  role="button"
+                  onClick={() => setSelectedImage(cert.image)}
                 >
-                  {cert.category}
-                </div>
-
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "15px",
-                    right: "15px",
-                    background: "#16a34a",
-                    color: "white",
-                    padding: "7px 14px",
-                    borderRadius: "30px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                  }}
-                >
-                  <FaCheckCircle />
-                  Verified
-                </div>
-
-                <div
-                  onClick={() =>
-                    setSelectedImage(cert.image)
-                  }
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "rgba(2,6,23,.55)",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    opacity: 0,
-                    cursor: "pointer",
-                    transition: ".35s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity =
-                      "1";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity =
-                      "0";
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "white",
-                      fontSize: "18px",
-                      fontWeight: 600,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
-                  >
-                    <FaSearchPlus />
-                    View Certificate
+                  <div>
+                    <FaSearchPlus /> View Certificate
                   </div>
                 </div>
               </div>
 
-              <div
-                style={{
-                  padding: "22px",
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: 1,
-                }}
-              >
-                <h3
-                  style={{
-                    marginBottom: "10px",
-                    fontSize: "23px",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {cert.title}
-                </h3>
+              <div className="certificate-content">
+                <h3 className="certificate-title">{cert.title}</h3>
+                <p className="certificate-issuer">Issued by {cert.issuer}</p>
+                <p className="certificate-issued">Issued: {cert.issued}</p>
 
-                <p
-                  style={{
-                    color: "#38bdf8",
-                    marginBottom: "6px",
-                    fontWeight: 600,
-                  }}
-                >
-                  Issued by {cert.issuer}
-                </p>
-
-                <p
-                  style={{
-                    color: "#94a3b8",
-                    marginBottom: "18px",
-                  }}
-                >
-                  Issued : {cert.issued}
-                </p>
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: "8px",
-                    marginBottom: "22px",
-                  }}
-                >
+                <div className="certificate-skills">
                   {cert.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      style={{
-                        background:
-                          "rgba(56,189,248,.12)",
-                        color: "#38bdf8",
-                        padding: "7px 14px",
-                        borderRadius: "30px",
-                        fontSize: "13px",
-                        fontWeight: 600,
-                      }}
-                    >
+                    <span key={skill} className="certificate-skill-pill">
                       {skill}
                     </span>
                   ))}
                 </div>
 
                 <button
-                  onClick={() =>
-                    setSelectedImage(cert.image)
-                  }
-                  style={{
-                    marginTop: "auto",
-                    padding: "13px",
-                    background: "#38bdf8",
-                    border: "none",
-                    borderRadius: "10px",
-                    color: "white",
-                    fontWeight: 700,
-                    cursor: "pointer",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: "10px",
-                  }}
+                  className="certificate-button"
+                  type="button"
+                  onClick={() => setSelectedImage(cert.image)}
                 >
-                  <FaEye />
-                  View Certificate
+                  <FaEye /> View Certificate
                 </button>
               </div>
-                          </div>
+            </article>
           ))}
-
         </div>
       </section>
 
       {selectedImage && (
         <div
+          className="modal-overlay"
           onClick={() => setSelectedImage(null)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,.85)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 9999,
-            padding: "30px",
-            cursor: "pointer",
-          }}
         >
           <img
             src={selectedImage}
             alt="Certificate Preview"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              maxWidth: "95%",
-              maxHeight: "90%",
-              borderRadius: "14px",
-              border: "3px solid #38bdf8",
-              boxShadow: "0 0 40px rgba(56,189,248,.45)",
-            }}
+            className="modal-image"
+            onClick={(event) => event.stopPropagation()}
           />
         </div>
       )}
